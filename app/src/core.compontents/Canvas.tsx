@@ -1,6 +1,5 @@
 import { ContainerEntity } from "@/core.compontents/abstract/ContainerEntity";
 import { Entity } from "@/core.compontents/abstract/Entity";
-import { TextEntity } from "@/core.compontents/eneityNode/TextEntity";
 import { MouseListener } from "@/core.compontents/interface/MouseListener";
 
 /**
@@ -21,21 +20,23 @@ export class Canvas extends ContainerEntity implements MouseListener {
     this.canvasElement = canvasElement;
     this.width = canvasElement.width;
     this.height = canvasElement.height;
-    this.Entitys.push(new TextEntity("Hello World"));
-    this.Entitys.at(0)!.parent = this;
   }
   // 组件树的事件捕获
-  onDown = (event: MouseEvent) => {
-    this.onDownCaptrue(event);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onDown = (_event: MouseEvent) => {
+    // this.onDownCaptrue(event);
   };
-  onUp = (event: MouseEvent) => {
-    this.onUpCaptrue(event);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onUp = (_event: MouseEvent) => {
+    // this.onUpCaptrue(event);
   };
-  onMove = (event: MouseEvent) => {
-    this.onMoveCaptrue(event);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onMove = (_event: MouseEvent) => {
+    // this.onMoveCaptrue(event);
   };
-  onClick = (event: MouseEvent) => {
-    this.onClickCaptrue(event);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onClick = (_event: MouseEvent) => {
+    // this.onClickCaptrue(event);
   };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onEnter = (_event: MouseEvent) => {

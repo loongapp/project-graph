@@ -2,6 +2,8 @@
 import { APP } from "@/APP";
 import { useRef, useEffect } from "react";
 import { Canvas as CanvasObj } from "@/core.compontents/Canvas";
+import { TextEntity } from "@/core.compontents/eneityNode/TextEntity";
+import { SectionEntity } from "@/core.compontents/eneityNode/SectionEntity";
 
 /**
  * 创建cnavas组件，设置基础属性，添加事件转发。
@@ -42,17 +44,37 @@ export function Canvas() {
     // 创建 Canvas 实例并设置 canvasElement
     const canvasInstance = new CanvasObj(canvas);
     app.canvases.push(canvasInstance);
-
+    {
+      // test
+      // canvasInstance.Entitys.push(new TextEntity("Hello World"));
+      canvasInstance.append(new TextEntity("Hello World"));
+      canvasInstance.append(new SectionEntity(100, 100, 200, 200));
+      // canvasInstance.Entitys.at(0)!.parent = canvasInstance;
+      // canvasInstance.Entitys.push(new SectionEntity(canvasInstance, 100, 100, 200, 200));
+      // canvasInstance.Entitys.at(1)!.parent = canvasInstance;
+    }
     // 初始尺寸设置
     updateSize();
 
     // 添加事件监听
     const canvasMouseListener = canvasInstance;
-    canvas.addEventListener("mousedown", canvasMouseListener.onDown);
-    canvas.addEventListener("mouseup", canvasMouseListener.onUp);
-    canvas.addEventListener("mousemove", canvasMouseListener.onMove);
-    canvas.addEventListener("mouseenter", canvasMouseListener.onEnter);
-    canvas.addEventListener("mouseleave", canvasMouseListener.onLeave);
+    canvas.addEventListener("mousedown", (event: MouseEvent) => {
+      canvasInstance.onDownCaptrue(event);
+    });
+    canvas.addEventListener("mouseup", (event: MouseEvent) => {
+      canvasInstance.onUpCaptrue(event);
+    });
+    canvas.addEventListener("mousemove", (event: MouseEvent) => {
+      canvasInstance.onMoveCaptrue(event);
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    canvas.addEventListener("mouseenter", (_event: MouseEvent) => {
+      // canvasInstance.onEnterCaptrue(event);
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    canvas.addEventListener("mouseleave", (_event: MouseEvent) => {
+      // canvasInstance.onDownCaptrue(event);
+    });
 
     // 监听窗口大小变化
     window.addEventListener("resize", updateSize);

@@ -13,7 +13,20 @@ export abstract class Entity implements ReaderInterface, MouseCaptrueListener {
   y!: number;
   width!: number;
   height!: number;
-  mouseListener!: MouseListener;
+  mouseListener: MouseListener = {
+    onDown: (event: MouseEvent): void => {
+      this.parent.mouseListener.onDown(event);
+    },
+    onUp: (event: MouseEvent): void => {
+      this.parent.mouseListener.onUp(event);
+    },
+    onMove: (event: MouseEvent): void => {
+      this.parent.mouseListener.onMove(event);
+    },
+    onClick: (event: MouseEvent): void => {
+      this.parent.mouseListener.onClick(event);
+    },
+  };
 
   onDownCaptrue(event: MouseEvent): void {
     if (!this.Entitys) {
